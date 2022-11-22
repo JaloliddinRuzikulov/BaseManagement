@@ -2,32 +2,11 @@ from django.db import models
 from django.urls import reverse
 
 
-# class Publication(models.Model):
-#     title = models.CharField(max_length=30)
-
-#     class Meta:
-#         ordering = ['title']
-
-#     def __str__(self):
-#         return self.title
-
-# class Article(models.Model):
-#     headline = models.CharField(max_length=100)
-#     publications = models.ManyToManyField(Publication)
-
-#     class Meta:
-#         ordering = [  'headline']
-
-#     def __str__(self):
-#         return self.headline
-
-# Create your models here.
-class tadbirModel(models.Model):
+class TadbirModel(models.Model):
     nametadbir = models.CharField(max_length=100)
     authuser = models.ForeignKey('auth.user', on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
     closeEvent = models.BooleanField(default=False)  # ombordami yuqmi
-
     def __str__(self):
         return self.nametadbir
 
@@ -35,8 +14,8 @@ class tadbirModel(models.Model):
         return reverse('evensts', args=[str(self.id)])
 
 
-class ratsiyaModel(models.Model):
-    tadbir = models.ManyToManyField(tadbirModel, through='Enrollment')
+class RatsiyaModel(models.Model):
+    tadbir = models.ManyToManyField(TadbirModel, through='Enrollment')
     katalog = models.CharField(max_length=200)
     rcode = models.SmallIntegerField(default=0)
     model = models.CharField(max_length=200)
@@ -52,10 +31,9 @@ class ratsiyaModel(models.Model):
 
 
 class Enrollment(models.Model):
-    tadbirModel = models.ForeignKey(tadbirModel, on_delete=models.CASCADE)
-    ratsiyaModel = models.ForeignKey(ratsiyaModel, on_delete=models.CASCADE)
+    TadbirModel = models.ForeignKey(TadbirModel, on_delete=models.CASCADE)
+    RatsiyaModel = models.ForeignKey(RatsiyaModel, on_delete=models.CASCADE)
     date_enrolled = models.DateField(auto_now=True)
 
-    #    final_grade = models.CharField(max_length=1, blank=True, null=True)
     class Meta:
-        unique_together = [['tadbirModel', 'ratsiyaModel']]
+        unique_together = [['TadbirModel', 'RatsiyaModel']]
