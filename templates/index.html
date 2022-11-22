@@ -6,15 +6,15 @@
 {% if 'Ichki' == group %}
 <div class="container-fluid">
   <div class="btnrs">
-    <a href="{%url 'add'%}"> <button type="button" class="btn btnw">Omborga
+    <a href="{%url 'add'%}"> <button type="button" class="btn btnw">Omborga tovar
       kiritish </button></a>
-    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#ombor">Ombordan
-      chiqarish</button>
-      <a href="{%url 'ombor'%}">  <button type="button" class="btn btnw">Ombordagi ma’lumotlar</button></a>
+    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#ombor" style='font-size:50px;'>Ombordan tovarni
+      chiqarib yuborish</button>
+      <a href="{%url 'ombor'%}">  <button type="button" class="btn btnw">Ombordagi tovar ma’lumotlari</button></a>
 
-      <a href="{%url 'lists'%}">  <button type="button" class="btn btnw">Ratsiya ma’lumotlar</button></a>
-    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#myModal">Ratsiya tadbir</button>
-    <a href="{%url 'events'%}">  <button type="button" class="btn btnw">Arxiv</button></a>
+      <a href="{%url 'lists'%}">  <button type="button" class="btn btnw" style='font-size:50px'>Ratsiya qurilmalarining ma’lumotlari</button></a>
+    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#myModal" style='font-size: 50px'>Ratsiyani tadbirga chiqarish ro'yhati</button>
+    <a href="{%url 'events'%}">  <button type="button" class="btn btnw">Arxivdagilar</button></a>
 
   </div>
   {%endif%}
@@ -59,7 +59,7 @@
   <div class="modal-content" style="background-color: #2C3E64; color:#fff;">
     <!-- Modal Header -->
     <div class="modal-header">
-      <label for="browser" class="form-label">Qanday tadbir yaratishni sababini kiriting:</label>
+      <label for="browser" class="form-label">Ombordan chiqarish sababi:</label>
       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
     <!-- Modal body -->

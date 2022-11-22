@@ -44,7 +44,9 @@
         <form method="post">  
           
             <img  class="form-floating" src="{% static 'css/logo.png' %}" width="500" height="500">
-          
+            <div class="form-floating mb-3 mt-3 alert alert-success alert-dismissible ">
+              Demo login parol: admin admin
+            </div>          
           
             {% csrf_token %}
             {%if form.errors.as_data  %}
