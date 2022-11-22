@@ -1,0 +1,185 @@
+{%if request.user.is_authenticated%}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inria Sans">
+    <link href="{%static '/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{%static '/css/base.css'%}" rel="stylesheet">
+    <script src="{%static '/js/bootstrap.bundle.min.js'%}"></script>
+    <link rel="icon" type="image/x-icon" href="{% static '/images/logo.ico' %} ">
+    <title>IIV Ma'lumot Ombori</title>
+    <script src="{%static '/js/html5-qrcode.min.js'%}"></script>
+  </head>
+
+  <body>
+    
+    {%if request.get_full_path == "/main/" or request.get_full_path == "/add/"%}
+    <style>
+      .qrimage {
+    background-repeat: no-repeat;
+    background:url({%static 'images/qrcode.png'%}); 
+     -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 5px;
+    margin-left: -60px;
+}
+.qrimage:hover{
+  opacity: 0.5;
+
+}
+
+
+    </style>
+    <nav class="navbar navbar-expand-sm bg-darks flex-fill navbar-dark" style="background-color: #2C3E50;">
+      
+      <div class="position-absolute top-10 start-0">  
+        <a class="navbar-brand" href="{%url 'main'%}">
+          <img src="{%static 'css/logo.png'%}" style="width:100px;margin-left: 0.5rem;" class="rounded-pill" alt="IIV BASE">
+       <b>{{ user.get_username }}</b>    </a>
+      </div>
+       <div class="position-absolute top-10 end-0" style="margin-right: 50px;">    <a href="{%url 'logout'%}" style="text-decoration: none; color:#fff;    font-size: x-small;"><img src="{%static 'css/exit.png'%}" style="margin: 0.5rem;">Tizimdan Chiqish</a>   </div>
+         </nav>
+         
+         {%endif%}
+
+
+
+    
+        {%if request.get_full_path != "/main/" and request.get_full_path != "/add/"%}
+            <div class="offcanvas offcanvas-top" id="demo" style="background-color: rgb(255, 255, 255 ,0  ); border-bottom: 1px solid rgba(0,0,0,0);">
+      <nav class="navbar navbar-expand-sm bg-darks navbar-dark" style="background-color: #2C3E50;">
+      
+        <div class="position-absolute top-10 start-0">  
+          <a class="navbar-brand" href="{%url 'main'%}">
+            <img src="{%static 'css/logo.png'%}" style="width:100px;margin-left: 0.5rem;" class="rounded-pill" alt="IIV BASE">
+         <b>{{ user.get_username }}</b>    </a>
+        </div>
+         <div class="position-absolute top-10 end-0" style="margin-right: 50px;">    <a href="{%url 'logout'%}" style="text-decoration: none; color:#fff;    font-size: x-small;"><img src="{%static 'css/exit.png'%}" style="margin: 0.5rem;">Tizimdan Chiqish</a>   </div>
+           </nav>
+    </div>
+        <nav class="sticky-top">
+          {%if request.get_full_path != "/lists/" and request.get_full_path != "/events/"%} 
+          <form method="post">
+            {%csrf_token%}
+            {%endif%}
+          <div class="input-group mb-3">
+
+           <input type="text" class="form-control bg-darks" placeholder="Qidirish" name="sabab" autofocus autocapitalize="none" autocomplete="browser" onkeyup="myFunction()" maxlength="150" id="sabab" style="margin-right: 0px;border-right-width: 0px;">
+
+            <button class="btn text-white p-4 bg-darks" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo" >Profilga kirish</button>   
+            {%if request.get_full_path != "/lists/" and request.get_full_path != "/events/"%} 
+           </form>
+          {%endif%}
+          </div>
+        </nav>
+
+
+
+
+    
+{%endif%}
+
+    {% block content %}
+    
+    {% endblock content %}
+
+    {%if request.get_full_path == "/add/"  %} 
+
+    
+    <style>
+      .result{
+        background-color: green;
+        color:#fff;
+        padding:20px;
+      }
+      .row{
+        display:flex;
+      }
+      
+    </style>
+    <div class=" p-2 bg-white text-black rounded " style="margin: 1rem ; display: none;" id="qrcoder">
+    <style>a {color:#2C3E50} a:hover {color: #2c3e507a;}</style> 
+        <div style="width:300px; color: #2C3E50;" id="reader"></div>
+    
+    
+    <script type="text/javascript">
+  count = 0;
+  qrcodelist = [];
+  function addField(detext="") {
+    input = document.getElementById("addinput");
+    inputv=input.value
+    if ( (inputv!="") && !( qrcodelist.includes(inputv)) ) {
+    count++;
+    input.value="";
+    fields = document.getElementById("fields");
+    fields.insertAdjacentHTML("beforeend"," <div id=\"clasis"+count+"\" class=\"form-floating mb-3 mt-3\"><input type=\"text\" class=\"form-control\" id=\"field"+count+"\" name=\"field"+count+"\" value=\""+inputv+"\"><label for=\"field"+count+"\">Seriya nomeri["+count+"]:</label></div>"); 
+    if (detext ==="Ratsiya")document.getElementById("clasis"+count).innerHTML+='  <input type="number" id="quantity'+count+'" name="quantity'+count+'" min="1" >';
+    qrcodelist.push(inputv);
+    document.getElementById('counts').value=count;  
+  }
+  
+}
+  function submitons(){
+    if (document.getElementById("addinput").value==""){
+    document.forms['dates'].onsubmit=""
+    document.getElementById('saqlash').click()
+  }
+}
+
+function handlerkeys(){
+  var x = event.key;
+
+  if (x=="Enter") {
+    if (document.getElementById('katalog').value ==="Ratsiya" ){
+          addField("Ratsiya");
+        } else addField("");
+
+
+}
+}
+
+function toggleqr(){
+var detect = document.getElementById('qrcoder').style.display;
+if (detect == '')
+{
+  document.getElementById('qrcoder').style.display = 'none';
+} else document.getElementById('qrcoder').style.display = '';
+ }
+    
+ function onScanSuccess(qrCodeMessage) {
+       if (document.getElementById('katalog').value !="Ratsiya" ){
+          document.getElementById('addinput').value = qrCodeMessage;
+          addField("S");
+          document.getElementById('addinput').value = "";        
+        }
+        else {
+          document.getElementById('addinput').value = qrCodeMessage;
+          addField("Ratsiya");
+          document.getElementById('addinput').value = "";        
+
+        }
+    
+      }
+    function onScanError(errorMessage) {
+      //handle scan error
+    }
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+</div>
+{%endif%}
+    
+  </body>
+
+</html>
+{%endif%}
+{%if not request.user.is_authenticated%}
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
+{%endif%}

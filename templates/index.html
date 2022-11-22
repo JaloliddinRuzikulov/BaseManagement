@@ -1,0 +1,89 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if 'Ichki' == group %}
+<div class="container-fluid">
+  <div class="btnrs">
+    <a href="{%url 'add'%}"> <button type="button" class="btn btnw">Omborga
+      kiritish </button></a>
+    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#ombor">Ombordan
+      chiqarish</button>
+      <a href="{%url 'ombor'%}">  <button type="button" class="btn btnw">Ombordagi ma’lumotlar</button></a>
+
+      <a href="{%url 'lists'%}">  <button type="button" class="btn btnw">Ratsiya ma’lumotlar</button></a>
+    <button type="button" class="btn btnw" data-bs-toggle="modal" data-bs-target="#myModal">Ratsiya tadbir</button>
+    <a href="{%url 'events'%}">  <button type="button" class="btn btnw">Arxiv</button></a>
+
+  </div>
+  {%endif%}
+<!-- Button to Open the Modal -->
+
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content" style="background-color: #2C3E64; color:#fff;">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <label for="browser" class="form-label">Tadbir nomini tanlang:</label>
+      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+      <form method="post">
+        {% csrf_token %}
+
+<!-- <input class="form-control" list="adds" > -->
+<select class="form-select" name="browser" id="browser" placeholder="Sababni kiriting" >
+<option>Prezident tashrif</option>
+<option>Yangi yil</option>
+<option>Festivallar  </option>
+<option>Futbol</option>
+<option>DTM Test</option>
+<option>Bazaga qaytarish</option>
+</select>
+
+<button type="submit" class="btn btn-success"  style="margin-top: 1rem ; margin-left: 4.5rem; width: 326px;">go</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="ombor">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content" style="background-color: #2C3E64; color:#fff;">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <label for="browser" class="form-label">Qanday tadbir yaratishni sababini kiriting:</label>
+      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body">
+      <form method="post">
+        {% csrf_token %}
+
+<input type="text" class="form-control" placeholder="Sababni kiriting" name="sabab" autofocus autocapitalize="none" autocomplete="browser" maxlength="150" required id="sabab">
+
+
+<button type="submit" class="btn btn-success"  style="margin-top: 1rem ; margin-left: 4.5rem; width: 326px;">go</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+  </div>
+
+  {% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+<div class="mt-4 p-5 bg-white text-black rounded" style="margin: 1rem;">
+<h1>Bazaga joylandi! <span class="badge"><p id="gtime" class="text-success"> <div class="spinner-grow text-success"></div></p></span></h1>
+    <h3 class="text-success">Katalog : <span class="text-black">{{ ratsiyamodel.katalog }}</span></h3>
+    <h3 class="text-success">Model : <span class="text-black">{{ ratsiyamodel.model }}</span></h3>
+    <h3 class="text-success">QR code : <span class="text-black">{{ ratsiyamodel.qr_code }}</span></h3>    
+</div>
+<script>
+    var sekund = 3 ;
+    var x = setInterval(function() {
+    sekund -- ;
+      document.getElementById("gtime").innerHTML =  sekund + "s ";
+    }, 1000);
+    </script>
+    
+    <meta http-equiv="REFRESH" content="2;url={% url 'add' %}">
+{% endblock content %}

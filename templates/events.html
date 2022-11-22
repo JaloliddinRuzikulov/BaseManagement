@@ -1,0 +1,41 @@
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <div class="d-flex flex-column-reverse">
+          {% for post in object_list %}
+
+            
+          <div class="searchid mt-2 p-4 bg-white rounded" style="margin-left: 5rem;margin-right: 5rem;" >
+          <a href="{%url 'events'%}{{post.id}}" class="text-black "> {{ post.nametadbir }}  {{ post.pub_date | date}} 
+            <span style="float: right;">{{ post.authuser }}</span>         
+          </a>
+          </div>
+
+
+      {% endfor %}
+    </div>
+
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("sabab");
+    filter = input.value.toUpperCase();
+    tr = document.getElementsByClassName("searchid");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("a")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+
+{% endblock content %}
+

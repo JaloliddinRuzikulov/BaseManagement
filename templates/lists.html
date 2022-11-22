@@ -1,0 +1,95 @@
+
+ 
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between" style="margin-left: 1rem;margin-right: 1rem;">
+  
+      <div class="mt-1 bg-light text-black rounded" style="padding: 1rem; padding-right: 100px ; font-size:xx-large;">    
+        Bazada: <span id="bazada"></span>
+      </div>
+      <div class="mt-1 bg-success text-white rounded" style="padding: 1rem; padding-right: 100px ; font-size:xx-large;">    
+        Tadbirda: <span id="tadbirda"></span>
+      </div>
+    
+    </div>
+
+
+
+
+    <div class="container mt-3">
+    <div class="p-5 bg-white text-black rounded " >
+    
+      <table class="table table-bordered" id="costs">
+        <thead>
+          <tr>
+            <th>Katalog</th>
+            <th>Model</th>
+            <th>Qr code: </th>
+            <th>Tadbirda</th>
+          </tr>
+        </thead>
+        <tbody>
+            {%for data  in object_list %}
+            {%if data.archive == False and data.katalog   == 'Ratsiya' %}
+            <tr>
+                <td>{{data.katalog}}</td>
+                <td>{{data.model}}</td>
+                <td>{{data.qr_code}}</td>
+              
+                <td><a href="/events/{{data.lasteventid }}" class = "text-black">{%for datas in tadbirlid%}{%if data.lasteventid == datas.id  %}{{datas.nametadbir}}{%endif%}{%endfor%}</td>
+              </a>
+              </tr>
+              {%endif%}
+            {%endfor%}
+
+              
+        </tbody>
+      </table>
+
+</div>
+
+
+<script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("sabab");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("costs");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }   
+            
+      }
+    }
+    table = document.getElementById("costs");
+    tr = table.getElementsByTagName("tr");
+    filter="  ";
+    var tadbirda=0;
+    son =tr.length-1;
+
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+        //  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          if (txtValue.toUpperCase()!="") {
+            tadbirda++;
+          } 
+        }   
+            
+      }
+      document.getElementById("tadbirda").innerHTML =  (tadbirda) + "ta ";
+      document.getElementById("bazada").innerHTML =  (son - tadbirda) + "ta ";
+    </script>
+  {% endblock content %}

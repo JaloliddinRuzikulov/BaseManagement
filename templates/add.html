@@ -1,0 +1,41 @@
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    
+    <div class="d-flex" >
+      <div class="d-flex flex-fill flex-column">
+<div class=" p-5 bg-white text-black rounded " style="margin: 1rem;">
+  <h1>Yangi ma'lumot qo'shish</h1>
+
+
+    <form  method="post" onsubmit="return false" name = "dates" >
+            {% csrf_token %}
+            <div id="fields">
+            <div class="form-floating mb-3 mt-3">
+              <input type="text" class="form-control" id="katalog"  name="katalog"required	>
+              <label for="katalog">Katalog:</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+              <input type="text" class="form-control" id="model" name="model"required	>
+              <label for="model">Model</label>
+            </div>
+
+
+   </div>
+   <div class="form-floating ms-3 me-3 d-flex">
+
+    <input type="text" class="form-control" onkeydown="handlerkeys()" id="addinput"  name="addinput"	>
+    <a class="btn  qrimage ps-5 pe-6" type="button" onclick="toggleqr()"></a>
+  </div>                        
+  </div>
+  <input type="text" id="counts" name="counts" style="display:none;" value="1">
+   <button class="btn bg-light text-black  p-3 mx-auto" style="width: 500px;" type="submit"  onmousedown="submitons()">Saqlash</button>
+  </div>
+      
+    </form>
+  
+  
+  
+  
+    {% endblock content %}

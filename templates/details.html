@@ -1,0 +1,122 @@
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+    
+    <div class="d-flex" >
+
+    <div class="container mt-3">
+    <div class="p-5 bg-white text-black rounded " >
+      <h3 class="text-black" >Tafsilotlar:</h3><h3> {{tadbir.nametadbir}} {{tadbir.pub_date}} </h3> 
+           {%if tadbir.closeEvent == True %}
+        <div class="alert alert-success">
+        <strong>Kiritish yopilgan !</strong> 
+        <a href="/events/{{tadbir.id}}/print" style="color : #000;">
+       
+
+          <button type="button" class="btn btn-secondary float-end" style=" margin-right: 10px;">Chop etish</button>
+          </a> 
+
+      </div>
+      
+      {%else%} 
+      <div class="clearfix">
+
+          <a href="/events/{{tadbir.id}}/close" style="color : #000">
+       
+
+            <button type="button" class="btn btn-secondary float-end" >Yopish</button>
+            </a> 
+                
+            <a href="/events/{{tadbir.id}}/print" style="color : #000;">
+       
+
+              <button type="button" class="btn btn-secondary float-end" style=" margin-right: 10px;">Chop etish</button>
+              </a> 
+    </div>
+      {%endif%}
+
+
+      <br>
+      {%if tadbirid %}
+      <table class="table table-bordered" id="costs">
+        <thead>
+          <tr>
+            <th>Katalog</th>
+            <th>Model</th>
+            <th>Qr code: </th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+{%for list in tadbirid %}
+{%for data in list %}
+<tr>
+  <td>{{data.katalog}}</td>
+  <td>{{data.model}}</td>
+  <td>{{data.qr_code}}</td>
+</tr>
+{%endfor%}
+{%endfor%}
+
+              
+        </tbody>
+        
+      </table>
+      {%else%} 
+      <h3 class="bg-success p-5 text-white" >Ma'lumot kiritilmagan</h3> 
+      {%endif%}
+</div>
+</div>
+{%if tadbir.closeEvent != True %}
+
+
+
+<style>
+  .result{
+    background-color: green;
+    color:#fff;
+    padding:20px;
+  }
+  .row{
+    display:flex;
+  }
+  
+</style>
+<div class=" p-2 bg-white text-black rounded " style="margin: 1rem ; " id="qrcoder">
+<style>a {color:#2C3E50} a:hover {color: #2c3e507a;}</style> 
+    <div style="width:300px; color: #2C3E50;" id="reader"></div>
+
+
+<script type="text/javascript">
+count = 0;
+qrcodelist = [];
+
+function qrcodeoff(){
+  document.getElementById('qrcoder').style.display = 'none';
+}
+
+function onScanSuccess(qrCodeMessage) {
+      document.getElementById('sabab').value = qrCodeMessage;
+      document.forms[0].submit();
+  }
+function onScanError(errorMessage) {
+  //handle scan error
+}
+
+var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess, onScanError);
+document.getElementById('btn1').click();setTimeout(() => {
+  if (document.getElementById("reader__camera_selection").options[document.getElementById("reader__camera_selection").selectedIndex=1].value) document.getElementById("reader__camera_selection").selectedIndex = 1;
+  if (document.getElementById('btn2')) document.getElementById('btn2').click(); 
+   
+   }, 2000);
+</script>
+
+</div>
+</div>
+{%endif%}
+    {% endblock content %}
+

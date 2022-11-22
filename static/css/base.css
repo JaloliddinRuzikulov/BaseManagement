@@ -1,0 +1,39 @@
+body {background-color: #34495E;}
+  
+.bg-darks {
+background-color: #2C3E50;
+border-radius: 25px;
+height: 129px;
+margin-left: 0.5rem;
+margin-right: 0.5rem;
+margin-top: 0.5rem;
+font-size: 32px;
+color: #fff;
+
+}
+.navbar .container-fluid {
+justify-content: flex-start;
+text-transform:capitalize;
+}
+.btnw {
+margin: 0.5rem;
+
+display: inline;
+width: 400px;
+height: 400px;
+background-color: #2C3E50;
+border-radius: 2rem;
+font-family: 'Inria Sans';
+font-size: 64px;
+color: #fff;
+}
+.btnrs {
+display: inline-flex;
+justify-content: center;
+flex-direction: row;
+flex-wrap: wrap;
+align-content: stretch;
+align-items: center;
+}
+a {color:#fff; text-decoration: none;}
+a:hover {color:rgb(255, 255, 255 ,0.5);}

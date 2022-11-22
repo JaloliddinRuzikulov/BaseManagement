@@ -1,0 +1,20 @@
+<script src="{%static '/js/html5-qrcode.min_.js'%}"></script>
+
+
+<div class="col" style="padding:30px;">
+  <h4>SCAN RESULT</h4>
+  <div style="width:500px;" id="reader"></div>
+  <div id="result">Result Here</div>
+</div>
+<script type="text/javascript">
+function onScanSuccess(qrCodeMessage) {
+  document.getElementById('namiInput').value=qrCodeMessage;
+  document.getElementById('clickButton').click();
+}
+function onScanError(errorMessage) {
+//handle scan error
+}
+var html5QrcodeScanner = new Html5QrcodeScanner(
+  "reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess, onScanError);
+</script>

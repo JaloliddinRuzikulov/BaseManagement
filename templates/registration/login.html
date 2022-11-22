@@ -1,0 +1,80 @@
+{%if not request.user.is_authenticated%}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        {% load static %}
+        <link rel="icon" type="image/x-icon" href="{% static '/images/logo.ico' %} ">
+        <title>IIV Ma'lumot Ombori</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="{%static '/js/bootstrap.bundle.min.js'%}"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal">
+<style>
+    body {
+
+
+        background-repeat: no-repeat;
+        background: url("{%static 'images/responsibility-quality.jpg'%}") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+        color: #1c1c1c;
+        font-family: 'Arsenal';
+    font-size: 24px;
+    line-height: 24px;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;    }
+
+.btnqwe {
+    font-size: 24px;
+    width: 683px;
+    margin-left: 21%;
+    height: calc(3.5rem + 2px);
+    }
+</style>
+</head>
+  <body>
+
+    <div class="container mt-3 p-4">
+<div class="position-absolute top-50 start-50 translate-middle">
+        <form method="post">  
+          
+            <img  class="form-floating" src="{% static 'css/logo.png' %}" width="500" height="500">
+          
+          
+            {% csrf_token %}
+            {%if form.errors.as_data  %}
+            <div class="form-floating mb-3 mt-3 alert alert-danger alert-dismissible ">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              Iltimos,  foydalanuvchi nomi va parolini to'g'ri kiriting. E'tibor bering, ikkala maydon ham katta-kichik harflarda xato bo'lishi ham mumkin.
+            </div>
+            
+            {%endif%}
+          <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" placeholder="Loginni kiriting" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+            <label for="id_username">Login:</label>
+          </div>
+          <div class="form-floating mt-3 mb-3">
+            <input type="password" class="form-control" placeholder="Parolni kiriting" name="password" autocomplete="current-password" required id="id_password"  >
+            <label for="id_password">Parol:</label>
+          </div>
+
+          
+           
+            <button type="submit" class="btn-light form-control" style="position: center; height: 80px; font-size: 34px;">Tizimga kirish</button>
+            </form></div>
+    </div>
+
+</body>
+</html>
+
+
+{%endif%}
+
+{%if request.user.is_authenticated%}
+<meta http-equiv="REFRESH" content="0;url={% url 'main' %}">
+{%endif%}
